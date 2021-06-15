@@ -7,19 +7,19 @@
     
     "sensors": {
         "Sensor 1": {
-            "c1": 12,"c2": "test1"
+            "c1": 23,"c2": "temperature"
         },
         "Sensor 2": {
-             "c1": 12,"c2": "test2"
+             "c1": 220,"c2": "luminosity"
         },
         "Sensor 3": {
-            "c1": 12,"c2": "test3"
+            "c1": 45,"c2": "humidity"
         },
         "Sensor 4": {
-            "c1": 12,"c2": "test4"
+            "c1": 2,"c2": "wind"
         },
         "Sensor 5": {
-            "c1": 12,"c2": "test5"
+            "c1": 7,"c2": "radiation"
         }
     }
 }
