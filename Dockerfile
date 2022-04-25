@@ -9,4 +9,4 @@ RUN pip3 --no-cache-dir install paho-mqtt
 
 
 ENTRYPOINT ["python3"]
-CMD ["app.py", "50000", "1000",  "1"]
+CMD ["app.py", "50000", "50",  "1"]
