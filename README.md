@@ -40,3 +40,14 @@ you can add as many sensors in the "sensors" object as you wish.
         } 
     }
     ```
+
+Running the example on OpenShift
+-------------
+Create a configmap with the your values for the configuration as in config-json.example file  
+
+`oc create configmap generator-config --from-file=config.json`
+
+volumes:
+    - name: config-volume
+      configMap:
+        name: special-config

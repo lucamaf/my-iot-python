@@ -41,7 +41,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
 
 def main(message,interval,iThread):
     """main entry point, load and validate config and call generate"""
-    config_path = "config.json"
+    config_path = "/cfg/config.json"
     try:
         with open(config_path) as handle:
             config = json.load(handle)
