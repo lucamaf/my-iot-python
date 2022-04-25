@@ -8,6 +8,7 @@ import os
 import json
 
 import time
+import logging
 
 import threading
 from threading import Thread
@@ -18,7 +19,12 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     mqttc = mqtt.Client(client_id="python-producer")
     # adding user authn
     mqttc.username_pw_set("sam", password="iROgtC9D")
-    mqttc.enable_logger()
+    # enable logging
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+
+
+    mqttc.enable_logger(logger)
 
     mqttc.connect(host, port)
 
