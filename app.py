@@ -21,9 +21,9 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     """generate data and send it to an MQTT broker"""
     mqttc = mqtt.Client(client_id="python-producer")
     # adding user authn
-    mqttc.username_pw_set("sam", password="iROgtC9D")
+    mqttc.username_pw_set("admin", password="password")
     # enable logging
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
     mqttc.enable_logger(logger)
 
