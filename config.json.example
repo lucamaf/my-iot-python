@@ -1,7 +1,7 @@
 {
     "mqtt": {
-        "host": "my-broker-my-acceptor-0-svc",
-        "port": 61626,
+        "host": "my-broker-mqtt-0-svc.appdev-broker.svc",
+        "port": 1883,
         "topic": "myIOT"
     },
     
