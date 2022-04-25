@@ -14,6 +14,9 @@ import threading
 from threading import Thread
 import paho.mqtt.client as mqtt
 
+def on_log(client, userdata, level, buf):
+    print("log: ",buf)
+
 def generate(host, port, topic, sensors, message, interval,iThread):
     """generate data and send it to an MQTT broker"""
     mqttc = mqtt.Client(client_id="python-producer")
@@ -21,10 +24,10 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     mqttc.username_pw_set("sam", password="iROgtC9D")
     # enable logging
     logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger(__name__)
-
-
+    logger = logging.getLogger()
     mqttc.enable_logger(logger)
+
+    mqtt.on_log = on_log
 
     mqttc.connect(host, port)
 
