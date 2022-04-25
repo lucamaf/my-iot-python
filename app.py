@@ -23,11 +23,11 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     # adding user authn
     mqttc.username_pw_set("sam", "iROgtC9D")
     # enable logging
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.WARN)
     logger = logging.getLogger()
     mqttc.enable_logger(logger)
 
-    mqttc.on_log = on_log
+    # mqttc.on_log = on_log
 
     mqttc.connect(host, port)
 
@@ -44,7 +44,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
         payload = json.dumps(sensor)
 
         #Uncomment this to check the sensor signals sent to broker
-        # print("%s: %s" % (topic, payload))
+        print("%s: %s" % (topic, payload))
 
         mqttc.publish(topic, payload)
         time.sleep(interval_secs)
