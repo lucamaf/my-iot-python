@@ -27,7 +27,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     logger = logging.getLogger()
     mqttc.enable_logger(logger)
 
-    mqtt.on_log = on_log
+    mqttc.on_log = on_log
 
     mqttc.connect(host, port)
 
