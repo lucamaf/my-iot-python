@@ -1,4 +1,4 @@
-from alpine:latest
+FROM alpine:latest
 RUN apk add --no-cache py3-pip \
     && pip3 install --upgrade pip
 
@@ -8,6 +8,9 @@ COPY . /app
 RUN pip3 --no-cache-dir install paho-mqtt
 
 ARG INTERVAL
+
+RUN echo "buildArgs demo:  INTERVAL=${INTERVAL} "
+
 
 ENTRYPOINT ["python3"]
 CMD ["app.py", "5000", "${INTERVAL}",  "1"]
