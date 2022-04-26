@@ -40,7 +40,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     #iterate till the end last message
     while loop<(message):
         sensor_id = random.choice(keys)
-        print(sensor)
+        print(sensor_id)
         sensor = sensors[sensor_id]
         loop = loop + 1
         payload = json.dumps(sensor)
