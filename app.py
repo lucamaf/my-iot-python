@@ -32,6 +32,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     mqttc.connect(host, port)
 
     keys = list(sensors.keys())
+    print(keys)
     interval_secs = interval/ 1000.0
     loop = 0
     #Start timer
