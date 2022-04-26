@@ -44,7 +44,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
         payload = json.dumps(sensor)
 
         #Uncomment this to check the sensor signals sent to broker
-        #print("%s: %s" % (topic, payload))
+        print("%s: %s" % (topic, payload))
 
         mqttc.publish(topic, payload)
         time.sleep(interval_secs)
