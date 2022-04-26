@@ -7,7 +7,7 @@ COPY . /app
 
 RUN pip3 --no-cache-dir install paho-mqtt
 
-ENV INTERNAL = 300
+ENV INTERVAL = 300
 
 ENTRYPOINT ["python3"]
 CMD ["app.py", "5000", "${INTERVAL}",  "1"]
