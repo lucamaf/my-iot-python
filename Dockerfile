@@ -11,4 +11,4 @@ ARG INTERVAL
 ENV ainterval = $INTERVAL
 
 ENTRYPOINT ["python3"]
-CMD ["app.py", "5000", "${ainterval}",  "1"]
+CMD ["app.py", "5000", "${INTERVAL}",  "1"]
