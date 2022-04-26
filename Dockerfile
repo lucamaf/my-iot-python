@@ -7,8 +7,8 @@ COPY . /app
 
 RUN pip3 --no-cache-dir install paho-mqtt
 
-ARG INTERVAL = 500
-ENV aInterval = $INTERVAL
+ARG INTERVAL=500
+ENV aInterval=$INTERVAL
 
 RUN echo "buildArgs demo:  INTERVAL=${INTERVAL} "
 
