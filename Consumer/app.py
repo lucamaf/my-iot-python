@@ -17,6 +17,14 @@ import paho.mqtt.client as mqtt
 def on_log(client, userdata, level, buf):
     print("log: ",buf)
 
+# This is the Subscriber reading messages
+def on_message(client, userdata, message):
+    print("message received " ,str(message.payload.decode("utf-8")))
+    print("message topic=",message.topic)
+    print("message qos=",message.qos)
+    print("message retain flag=",message.retain)
+    
+
 # this is the Producer
 # generating messages and reading them at the same time
 def generate(host, port, topic, sensors, message, interval,iThread):
@@ -28,12 +36,17 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     # enable logging
     logging.basicConfig(level=logging.WARN)
     logger = logging.getLogger()
-   
+    # consumer client
+    mqttcc = mqtt.Client(client_id="python-consumer")
+    mqttcc.username_pw_set("rob", "lVecEu5K")
+
     mqttc.enable_logger(logger)
+    mqttcc.enable_logger(logger)
     # mqttc.on_log = on_log
 
-    # connecting producer
+    # connecting producer and consumer
     mqttc.connect(host, port)
+    mqttcc.connect(host,port)
 
     keys = list(sensors.keys())
     #print(keys)
@@ -55,6 +68,9 @@ def generate(host, port, topic, sensors, message, interval,iThread):
         mqttc.publish(topic, payload)
         time.sleep(interval_secs)
 
+        # consuming messages at the same time
+        # to measure e2e throughput
+        # mqttcc.consume(topic)
     stop = timeit.default_timer()
     #Publish the execution time for pushing the data
     print("Thread" + str(iThread + 1) + "=" + str(round((message / (stop - start)), 2)) + "msg/sec")
