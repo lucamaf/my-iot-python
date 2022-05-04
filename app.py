@@ -57,7 +57,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
 
     stop = timeit.default_timer()
     #Publish the execution time for pushing the data
-    print("Thread" + str(iThread + 1) + "=" + str(round((message / (stop - start)), 2)) + "msg/sec")
+    print("Thread" + str(iThread + 1) + "=" + str(round((message / (stop - start)), 2)) + "msg/sec", flush=True)
 
 def main(message,interval,iThread):
     """main entry point, load and validate config and call generate"""
@@ -85,13 +85,13 @@ if __name__ == '__main__':
        #for multithreading
         for iThread in range(int(sys.argv[3])):
             Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread)).start();
-        sys.stdout.flush()
-        # sleeping forever after generating all messages
-        while True:
-            time.sleep(60)
+        #sys.stdout.flush()
+        
     else:
        print("Pass all the required parameters => mqttgen.py messageCounts messageInterval NoOfThread")
-
+    # sleeping forever after generating all messages
+    while True:
+        time.sleep(60)
     
  
     # for iThread in range(5):
