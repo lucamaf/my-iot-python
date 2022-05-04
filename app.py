@@ -44,7 +44,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     #iterate till the end last message
     while loop<(message):
         sensor_id = random.choice(keys)
-        print(sensor_id)
+        
         sensor = sensors[sensor_id]
         loop = loop + 1
         payload = json.dumps(sensor)
@@ -89,8 +89,8 @@ if __name__ == '__main__':
        print("Pass all the required parameters => mqttgen.py messageCounts messageInterval NoOfThread")
 
     # sleeping forever after generating all messages
-    while True:
-        time.sleep(60)
+    #while True:
+    #    time.sleep(60)
  
     # for iThread in range(5):
     #     Thread(target=main, args=(1, 0, iThread)).start();
