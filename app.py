@@ -85,6 +85,7 @@ if __name__ == '__main__':
        #for multithreading
         for iThread in range(int(sys.argv[3])):
             Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread)).start();
+        sys.stdout.flush()
         # sleeping forever after generating all messages
         while True:
             time.sleep(60)
