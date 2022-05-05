@@ -60,8 +60,8 @@ def generate(host, port, topic, sensors, message, interval,iThread,qos,size):
         loop = loop + 1
         # appending current timestamp to the dict at the beginning of the msg
         updict = {"timestamp": datetime.now().isoformat()}
-        updict.update(sensor)
-        payload = json.dumps(updict)
+        #updict.update(sensor)
+        payload = json.dumps(sensor)
 
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
