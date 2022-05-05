@@ -14,4 +14,4 @@ RUN pip3 --no-cache-dir install paho-mqtt
 
 ENTRYPOINT ["python3"]
 # messages, milliseconds between messages, threads
-CMD ["app.py", "200000", "0",  "1"]
+CMD ["app.py", "60000", "0",  "1"]
