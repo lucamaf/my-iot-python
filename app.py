@@ -17,6 +17,7 @@ import logging
 from threading import Thread
 from datetime import date, datetime
 
+
 import paho.mqtt.client as mqtt
 
 def on_log(client, userdata, level, buf):
@@ -42,7 +43,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,qos,size):
 
     keys = list(sensors.keys())
     #print(keys)
-    interval_secs = interval/ 1000.0
+    interval_secs = interval / 1000.0
     loop = 0
     #Start timer
     start = timeit.default_timer()
@@ -52,9 +53,9 @@ def generate(host, port, topic, sensors, message, interval,iThread,qos,size):
         
         sensor = sensors[sensor_id]
         # get a multiple of the sensor payload size based on user input
-        for s in range(size):
-            #print("counter "+str(s));
-            s+1;
+        #for s in range(size):
+        #    #print("counter "+str(s));
+        #    s+1;
 
         loop = loop + 1
         # appending current timestamp to the dict at the beginning of the msg
