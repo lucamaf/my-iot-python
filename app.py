@@ -54,7 +54,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,qos):
         sensor = sensors[sensor_id]
         loop = loop + 1
         # appending current timestamp to the dict
-        updict = {"timestamp": datetime.now()}
+        updict = {"timestamp": datetime.now().isoformat()}
         updict.update(sensor)
         payload = json.dumps(updict)
 
