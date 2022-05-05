@@ -26,7 +26,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
     # adding user authn
     mqttc.username_pw_set("sam", "iamsam")
     # enable logging
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
    
     mqttc.enable_logger(logger)
