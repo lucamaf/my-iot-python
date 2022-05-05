@@ -53,7 +53,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,qos,size):
         sensor = sensors[sensor_id]
         # get a multiple of the sensor payload size based on user input
         for s in range(size):
-            print("counter "+s);
+            print("counter "+str(s));
 
         loop = loop + 1
         # appending current timestamp to the dict at the beginning of the msg
