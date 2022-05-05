@@ -52,7 +52,7 @@ def generate(host, port, topic, sensors, message, interval,iThread):
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
 
-        mqttc.publish(topic, payload, qos=1)
+        mqttc.publish(topic, payload, qos=2)
         time.sleep(interval_secs)
 
     stop = timeit.default_timer()
