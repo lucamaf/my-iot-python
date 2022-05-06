@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """a simple sensor data generator that sends to an MQTT broker via paho"""
-import datetime
 import json
 import random
 import timeit
@@ -11,7 +10,7 @@ import json
 import time
 import logging
 
-import threading
+from datetime import datetime
 from threading import Thread
 import paho.mqtt.client as mqtt
 
