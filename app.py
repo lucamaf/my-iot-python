@@ -48,14 +48,18 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
         sensor = sensors[sensor_id]
         loop = loop + 1
 
+        acopy = sensor.copy()
         # get a multiple of the sensor payload size based on user input
-        #for s in range(asize):
-        #    print("counter "+str(s));
+        s=0
+        while s < asize:
+            acopy.update(sensor)
+            s = s + 1
+            #print("counter "+str(s));
 
          # appending current timestamp to the dict at the beginning of the msg
         updict = {"timestamp": datetime.now().isoformat()}
         updict.update(sensor)
-        payload = json.dumps(sensor)
+        payload = json.dumps(updict)
 
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
