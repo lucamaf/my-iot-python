@@ -52,7 +52,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
         # get a multiple of the sensor payload size based on user input
         s=0
         while s < asize:
-            acopy.update(sensor)
+            acopy.update(acopy)
             s = s + 1
             #print("counter "+str(s));
 
