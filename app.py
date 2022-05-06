@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """a simple sensor data generator that sends to an MQTT broker via paho"""
+import datetime
 import json
 import random
 import timeit
@@ -19,7 +20,7 @@ def on_log(client, userdata, level, buf):
 
 # this is the Producer
 # generating messages and reading them at the same time
-def generate(host, port, topic, sensors, message, interval,iThread):
+def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
     """generate data and send it to an MQTT broker"""
     # producer client
     mqttc = mqtt.Client(client_id="python-producer")
@@ -47,19 +48,27 @@ def generate(host, port, topic, sensors, message, interval,iThread):
         
         sensor = sensors[sensor_id]
         loop = loop + 1
+
+        # get a multiple of the sensor payload size based on user input
+        #for s in range(asize):
+        #    print("counter "+str(s));
+
+         # appending current timestamp to the dict at the beginning of the msg
+        updict = {"timestamp": datetime.now().isoformat()}
+        updict.update(sensor)
         payload = json.dumps(sensor)
 
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
         mqttc.max_inflight_messages_set(65000)
-        mqttc.publish(topic, payload, 1)
+        mqttc.publish(topic, payload, aqos)
         time.sleep(interval_secs)
 
     stop = timeit.default_timer()
     #Publish the execution time for pushing the data
     print("Thread" + str(iThread + 1) + "=" + str(round((message / (stop - start)), 2)) + "msg/sec", flush=True)
 
-def main(message,interval,iThread):
+def main(message,interval,iThread,aqos,asize):
     """main entry point, load and validate config and call generate"""
     config_path = "/cfg/config.json"
     try:
@@ -76,15 +85,15 @@ def main(message,interval,iThread):
             port = mqtt_config.get("port", 1883)
             topic = mqtt_config.get("topic", "mqttgen")
 
-            generate(host, port, topic, sensors,message, interval, iThread)
+            generate(host, port, topic, sensors,message, interval, iThread,aqos,asize)
     except IOError as error:
         print("Error opening config file '%s'" % config_path, error)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 4:
+    if len(sys.argv) == 6:
        #for multithreading
         for iThread in range(int(sys.argv[3])):
-            Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread)).start();
+            Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread, int(sys.argv[4]),int(sys.argv[5]))).start();
         #sys.stdout.flush()
         
     else:
