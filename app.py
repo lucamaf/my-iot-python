@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 """a simple sensor data generator that sends to an MQTT broker via paho"""
+# TODO: generate variable payload up to 100kb based on cmd line args
+# reading puback reply, all single threaded to maintain order
+# add support for amqp protocol, payload size
+# implement on_publish to receive the ack
+# publish over 2 different topics, alternating
+# add nseq number of message
 import json
 import random
 import timeit
@@ -50,16 +56,18 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
 
         acopy = sensor.copy()
         # get a multiple of the sensor payload size based on user input
-        s=0
-        while s < asize:
-            acopy.update(acopy)
-            s = s + 1
+        #s=0
+        #while s < asize:
+        #    acopy.update(acopy)
+        #    s = s + 1
             #print("counter "+str(s));
 
-         # appending current timestamp to the dict at the beginning of the msg
+        # appending current timestamp and a counter to the dict at the beginning of the msg
         updict = {"timestamp": datetime.now().isoformat()}
         updict.update(sensor)
-        payload = json.dumps(updict)
+        counter = {"counter": loop}
+        counter.update(updict)
+        payload = json.dumps(counter)
 
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
