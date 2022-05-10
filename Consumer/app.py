@@ -35,7 +35,7 @@ def consume(host, port, topic):
     logger = logging.getLogger()
     # consumer client
     mqttcc = mqtt.Client(client_id="python-consumer")
-    mqttcc.username_pw_set("rob", "cm9iYmluZ2Jhbmtz")
+    mqttcc.username_pw_set("rob", "robbingbanks")
 
     mqttcc.enable_logger(logger)
     mqttcc.on_log = on_log
