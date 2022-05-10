@@ -47,7 +47,7 @@ def consume(host, port, topic):
     mqttcc.subscribe(topic)
     mqttcc.loop_forever()
 
-def main():
+if __name__ == '__main__':
     """main entry point, load and validate config and call generate"""
     config_path = "/cfg/config.json"
     try:
