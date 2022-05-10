@@ -41,11 +41,11 @@ def consume(host, port, topic):
 
     # connecting producer and consumer
     mqttcc.connect(host,port)
-    mqttcc.loop_start()
     
     #Start timer
     # start = timeit.default_timer()
     mqttcc.subscribe(topic)
+    mqttcc.loop_forever()
 
 def main():
     """main entry point, load and validate config and call generate"""
