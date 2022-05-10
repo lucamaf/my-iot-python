@@ -29,14 +29,14 @@ def on_message(client, userdata, message):
 def consume(host, port, topic):
 
     # enable logging
-    logging.basicConfig(level=logging.WARN)
+    logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
     # consumer client
     mqttcc = mqtt.Client(client_id="python-consumer")
     mqttcc.username_pw_set("rob", "lVecEu5K")
 
     mqttcc.enable_logger(logger)
-    # mqttc.on_log = on_log
+    mqttcc.on_log = on_log
     mqttcc.on_message = on_message
 
     # connecting producer and consumer
