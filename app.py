@@ -30,7 +30,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
     # producer client
     mqttc = mqtt.Client(client_id="python-producer")
     # adding user authn
-    mqttc.username_pw_set("sam", "iamsam")
+    mqttc.username_pw_set("sam", "aWFtc2Ft")
     # enable logging
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
