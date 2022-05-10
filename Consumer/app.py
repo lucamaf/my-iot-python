@@ -43,11 +43,11 @@ def consume(host, port, topic):
     mqttcc.on_connect = on_connect
     # connecting producer and consumer
     mqttcc.connect(host,port)
-    mqttcc.loop_start()
+    
     #Start timer
     # start = timeit.default_timer()
-    mqttcc.subscribe(topic)
-    
+    mqttcc.subscribe(topic, 2)
+    mqttcc.loop_forever()
     
 
 if __name__ == '__main__':
