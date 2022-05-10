@@ -20,8 +20,8 @@ def on_log(client, userdata, level, buf):
 def on_message(client, userdata, message):
     print("message received " ,str(message.payload.decode("utf-8")),flush=True)
     print("message topic=",message.topic,flush=True)
-    print("message qos=",message.qos,flush=True)
-    print("message retain flag=",message.retain,flush=True)
+    #print("message qos=",message.qos,flush=True)
+    #print("message retain flag=",message.retain,flush=True)
     
 def on_connect(client, userdata, flags, rc):
         if rc == 0:
@@ -38,7 +38,7 @@ def consume(host, port, topic):
     mqttcc.username_pw_set("rob", "robbingbanks")
 
     mqttcc.enable_logger(logger)
-    mqttcc.on_log = on_log
+    #mqttcc.on_log = on_log
     mqttcc.on_message = on_message
     mqttcc.on_connect = on_connect
     # connecting producer and consumer
@@ -48,7 +48,7 @@ def consume(host, port, topic):
     # start = timeit.default_timer()
     mqttcc.subscribe(topic)
     
-    mqttcc.loop_forever()
+    mqttcc.loop_start()
 
 if __name__ == '__main__':
     """main entry point, load and validate config and call generate"""
