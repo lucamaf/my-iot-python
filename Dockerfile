@@ -14,5 +14,5 @@ RUN pip3 --no-cache-dir install paho-mqtt
 
 ENTRYPOINT ["python3"]
 # messages, milliseconds between messages, threads, qos, size multiple
-# size mutiple guidance 4 -> 5 KB large msg , 5 -> 10 KB large msg, 6 -> 20 KB, 7-> 42 KB, 8 -> 84 KB
-CMD ["app.py", "200000", "0",  "1", "2", "8"]
+# size mutiple guidance 4 -> 5 KB large msg , 5 -> 10 KB large msg, 6 -> 20 KB, 7-> 42 KB, 8 -> 86 KB
+CMD ["app.py", "200000", "0",  "1", "2", "9"]
