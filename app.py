@@ -5,7 +5,7 @@
 # add support for amqp protocol, payload size
 # implement on_publish to receive the ack
 # publish over 2 different topics, alternating
-# add nseq number of message
+import itertools
 import json
 import random
 import timeit
@@ -25,7 +25,7 @@ def on_log(client, userdata, level, buf):
 
 # this is the Producer
 # generating messages and reading them at the same time
-def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
+def generate(host, port, topic, sensors, message, interval,iThread,aqos):
     """generate data and send it to an MQTT broker"""
     # producer client
     mqttc = mqtt.Client(client_id="python-producer")
@@ -66,6 +66,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos,asize):
         updict = {"timestamp": datetime.now().isoformat()}
         updict.update(sensor)
         counter = {"counter": loop}
+        # add counter to verify ordering
         counter.update(updict)
         payload = json.dumps(counter)
 
@@ -87,7 +88,11 @@ def main(message,interval,iThread,aqos,asize):
             config = json.load(handle)
             mqtt_config = config.get("mqtt", {})
             sensors = config.get("sensors")
-
+            # multiply the length of each sensor array by the size
+            for i in range(len(sensors.keys())):
+                for j in range(asize):
+                    sensors[i].append(",")
+                    sensors[i].append(sensors[i])
             if not sensors:
                 print("no sensors specified in config.json")
                 return
@@ -96,7 +101,7 @@ def main(message,interval,iThread,aqos,asize):
             port = mqtt_config.get("port", 1883)
             topic = mqtt_config.get("topic", "mqttgen")
 
-            generate(host, port, topic, sensors,message, interval, iThread,aqos,asize)
+            generate(host, port, topic, sensors,message, interval, iThread,aqos)
     except IOError as error:
         print("Error opening config file '%s'" % config_path, error)
 
