@@ -38,8 +38,8 @@ def consume(host, port, topic):
     #mqttcc.on_log = on_log
     mqttcc.on_message = on_message
     mqttcc.on_connect = on_connect
-    # connecting producer and consumer
-    mqttcc.connect(host,port)
+    # connecting consumer with keepalive modified to control disconnect from broker
+    mqttcc.connect(host,port,keepalive=600)
     
     #Start timer
     # start = timeit.default_timer()
