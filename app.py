@@ -83,7 +83,10 @@ def main(message,interval,iThread,aqos,asize):
             # multiply the length of each sensor array by the size
             for key in iter(sensors):
                 for j in range(asize):
-                    sensors[key].update(sensors[key])
+                    adict=sensors[key]
+                    sensors[key].update(adict)
+                if key == "Sensor 1":
+                    print("duplicate: "+ sensors[key], flush=True)
             if not sensors:
                 print("no sensors specified in config.json")
                 return
