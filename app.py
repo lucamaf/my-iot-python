@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """a simple sensor data generator that sends to an MQTT broker via paho"""
-# TODO: generate variable payload up to 100kb based on cmd line args
+# TODO: 
 # reading puback reply, all single threaded to maintain order
 # add support for amqp protocol
 # implement on_publish to receive the ack
@@ -64,17 +64,18 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos):
 
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
-        mqttc.max_inflight_messages_set(2000)
+        mqttc.max_inflight_messages_set(60000)
         mqttc.publish(topic, payload, aqos)
         time.sleep(interval_secs)
 
     stop = timeit.default_timer()
-    
+    # clear cache
+    sensors = {}
+
     #Publish the execution time for pushing the data
     print("Thread" + str(iThread + 1) + "=" + str(round((message / (stop - start)), 2)) + "msg/sec", flush=True)
 
-    # clear cache
-    sensors = {}
+    
 
 def main(message,interval,iThread,aqos,asize):
     """main entry point, load and validate config and call generate"""
