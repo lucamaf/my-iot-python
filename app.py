@@ -69,6 +69,8 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos):
         time.sleep(interval_secs)
 
     stop = timeit.default_timer()
+    # clear cache
+    sensors = {}
     #Publish the execution time for pushing the data
     print("Thread" + str(iThread + 1) + "=" + str(round((message / (stop - start)), 2)) + "msg/sec", flush=True)
 
@@ -87,8 +89,8 @@ def main(message,interval,iThread,aqos,asize):
                     for k in iter(acopy):
                         sensors[key][k+str(j)] = acopy[k]
                         
-                if key == "Sensor 1":
-                    print("Duplicated: "+str(sensors[key]),flush=True)
+                #if key == "Sensor 1":
+                #    print("Duplicated: "+str(sensors[key]),flush=True)
                 
             if not sensors:
                 print("no sensors specified in config.json")
