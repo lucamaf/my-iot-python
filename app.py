@@ -88,7 +88,7 @@ def main(message,interval,iThread,aqos,asize):
                         sensors[key][k+str(j)] = acopy[k]
                         
                 if key == "Sensor 1":
-                    print("Duplicated: "+str(sensors[key]))
+                    print("Duplicated: "+str(sensors[key]),flush=True)
                 
             if not sensors:
                 print("no sensors specified in config.json")
