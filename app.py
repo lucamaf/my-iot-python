@@ -64,7 +64,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos):
 
         #Uncomment this to check the sensor signals sent to broker
         # print("PRODUCING: %s: %s" % (topic, payload))
-        mqttc.max_inflight_messages_set(65000)
+        mqttc.max_inflight_messages_set(2000)
         mqttc.publish(topic, payload, aqos)
         time.sleep(interval_secs)
 
