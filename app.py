@@ -25,12 +25,12 @@ def on_log(client, userdata, level, buf):
 
 # this is the Producer
 # generating messages and reading them at the same time
-def generate(host, port, topic, sensors, message, interval,iThread,aqos):
+def generate(host, port, topic, sensors, message, interval,iThread,aqos,username,password):
     """generate data and send it to an MQTT broker"""
     # producer client
     mqttc = mqtt.Client(client_id="python-producer")
     # adding user authn
-    mqttc.username_pw_set("sam", "iamsam")
+    mqttc.username_pw_set(username, password)
     # enable logging
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
@@ -77,7 +77,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos):
 
     
 
-def main(message,interval,iThread,aqos,asize):
+def main(message,interval,iThread,aqos,asize,username,password):
     """main entry point, load and validate config and call generate"""
     config_path = "/cfg/config.json"
     try:
@@ -103,15 +103,16 @@ def main(message,interval,iThread,aqos,asize):
             port = mqtt_config.get("port", 1883)
             topic = mqtt_config.get("topic", "mqttgen")
 
-            generate(host, port, topic, sensors,message, interval, iThread,aqos)
+            generate(host, port, topic, sensors,message, interval, iThread,aqos,username,password)
     except IOError as error:
         print("Error opening config file '%s'" % config_path, error)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 6:
+    if len(sys.argv) == 8:
        #for multithreading
         for iThread in range(int(sys.argv[3])):
-            Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread, int(sys.argv[4]),int(sys.argv[5]))).start();
+            # message interval threads QoS size username password
+            Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread, int(sys.argv[4]),int(sys.argv[5]),str(sys.argv[6]),str(sys.argv[7]))).start();
         
     else:
        print("Pass all the required parameters => mqttgen.py messageCounts messageInterval NoOfThread")
