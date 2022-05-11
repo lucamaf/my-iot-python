@@ -89,10 +89,10 @@ def main(message,interval,iThread,aqos,asize):
             mqtt_config = config.get("mqtt", {})
             sensors = config.get("sensors")
             # multiply the length of each sensor array by the size
-            for i in range(len(sensors.keys())):
+            for key in iter(sensors):
                 for j in range(asize):
-                    sensors[i].append(",")
-                    sensors[i].append(sensors[i])
+                    sensors[key].append(",")
+                    sensors[key].append(sensors[key])
             if not sensors:
                 print("no sensors specified in config.json")
                 return
@@ -110,7 +110,6 @@ if __name__ == '__main__':
        #for multithreading
         for iThread in range(int(sys.argv[3])):
             Thread(target=main, args=(int(sys.argv[1]),int(sys.argv[2]),iThread, int(sys.argv[4]),int(sys.argv[5]))).start();
-        #sys.stdout.flush()
         
     else:
        print("Pass all the required parameters => mqttgen.py messageCounts messageInterval NoOfThread")
