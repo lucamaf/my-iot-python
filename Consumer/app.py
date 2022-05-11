@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 """a simple MQTT consumer that reads from an MQTT broker via paho"""
 import json
-import random
 import timeit
-import sys
 import os
 import json
 
 import time
 import logging
 
-from threading import Thread
 import paho.mqtt.client as mqtt
 
 def on_log(client, userdata, level, buf):
@@ -18,8 +15,8 @@ def on_log(client, userdata, level, buf):
 
 # This is the Subscriber reading messages
 def on_message(client, userdata, message):
-    print("message received " ,str(message.payload.decode("utf-8")),flush=True)
-    print("message topic=",message.topic,flush=True)
+    print("message received: " ,str(message.payload.decode("utf-8")),flush=True)
+    print("message topic = ",message.topic,flush=True)
     #print("message qos=",message.qos,flush=True)
     #print("message retain flag=",message.retain,flush=True)
     
