@@ -86,7 +86,7 @@ def main(message,interval,iThread,aqos,asize):
                     adict=sensors[key]
                     sensors[key].update(adict)
                 if key == "Sensor 1":
-                    print("duplicate: "+ sensors[key], flush=True)
+                    print("duplicate: "+ str(sensors[key]), flush=True)
             if not sensors:
                 print("no sensors specified in config.json")
                 return
