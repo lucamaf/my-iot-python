@@ -1,0 +1,50 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: prometheus
+#  namespace: ns3
+  labels:
+    app: prometheus
+    app.kubernetes.io/component: prometheus
+    app.kubernetes.io/instance: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: prometheus
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        deployment: prometheus
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+    spec:
+      volumes:
+        - name: prometheus-volume-1
+          emptyDir: {}
+        - configMap:
+            defaultMode: 420
+            name: prom-config
+          name: prom-config-volume
+      containers:
+        - name: prometheus
+          image: >-
+            prom/prometheus@sha256:377894421d88619dc51dbcd46ceba75a5ea842b0a878f173e6476f20c1645630
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: prometheus-volume-1
+              mountPath: /prometheus
+            - mountPath: /etc/prometheus/
+              name: prom-config-volume
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler

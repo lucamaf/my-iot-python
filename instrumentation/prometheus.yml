@@ -1,0 +1,13 @@
+global:
+  scrape_interval:     5s 
+  evaluation_interval: 5s
+scrape_configs:
+- job_name: "prometheus"
+  static_configs:
+  - targets: ["localhost:9090"]
+- job_name: "broker1"
+  static_configs:
+  - targets: ["vw-broker-wconsj-0-svc-rte-ns3.apps.my.ocp4.openshift.es"]
+    labels:
+      broker_name: broker1
+

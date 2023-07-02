@@ -15,11 +15,15 @@ def on_log(client, userdata, level, buf):
 
 # This is the Subscriber reading messages
 def on_message(client, userdata, message):
-    print("message received: " ,str(message.payload.decode("utf-8")),flush=True)
-    print("message topic = ",message.topic,flush=True)
+    #print("message received: " ,str(message.payload.decode("utf-8")),flush=True)
+    #print("message topic = ",message.topic,flush=True)
     #print("message qos=",message.qos,flush=True)
     #print("message retain flag=",message.retain,flush=True)
-    
+
+    print("message received: " ,str(message.payload.decode("utf-8")))
+    print("message topic = ",message.topic)
+#    client.publish(message.topic, payload="", qos=2, retain=False)
+ 
 def on_connect(client, userdata, flags, rc):
         if rc == 0:
             print("Connected to MQTT Broker!")
@@ -31,7 +35,7 @@ def consume(host, port, topic):
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger()
     # consumer client
-    mqttcc = mqtt.Client(client_id="python-consumer")
+    mqttcc = mqtt.Client(client_id="")
     mqttcc.username_pw_set("rob", "robbingbanks")
 
     mqttcc.enable_logger(logger)

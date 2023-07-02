@@ -27,6 +27,7 @@ def on_log(client, userdata, level, buf):
 # generating messages and reading them at the same time
 def generate(host, port, topic, sensors, message, interval,iThread,aqos,username,password):
     """generate data and send it to an MQTT broker"""
+
     # producer client
     mqttc = mqtt.Client(client_id="python-producer")
     # adding user authn
@@ -63,7 +64,7 @@ def generate(host, port, topic, sensors, message, interval,iThread,aqos,username
         payload = json.dumps(counter)
 
         #Uncomment this to check the sensor signals sent to broker
-        # print("PRODUCING: %s: %s" % (topic, payload))
+        print("PRODUCING: %s: %s" % (topic, payload))
         mqttc.max_inflight_messages_set(60000)
         mqttc.publish(topic, payload, aqos)
         time.sleep(interval_secs)
@@ -106,6 +107,7 @@ def main(message,interval,iThread,aqos,asize,username,password):
             generate(host, port, topic, sensors,message, interval, iThread,aqos,username,password)
     except IOError as error:
         print("Error opening config file '%s'" % config_path, error)
+
 
 if __name__ == '__main__':
     if len(sys.argv) == 8:

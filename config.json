@@ -1,0 +1,34 @@
+{
+        "mqtt": {
+            "host": "vw-broker-mqtt-acceptor-0-svc.ns3.svc.cluster.local",
+            "port": 1883,
+            "topic": "myIOT"
+        },
+        
+        "sensors": {
+            "Sensor 1": {
+                "c1": 23,"c2": "temperature"
+            },
+            "Sensor 2": {
+                 "c1": 220,"c2": "luminosity"
+            },
+            "Sensor 3": {
+                "c1": 45,"c2": "humidity"
+            },
+            "Sensor 4": {
+                "c1": 2,"c2": "wind"
+            },
+            "Sensor 5": {
+                "c1": 7,"c2": "radiation",
+                "c3": 23,"c4": "temperature",
+                "c5": 220,"c6": "luminosity",
+                "c7": 45,"c8": "humidity",
+                "c9": 2,"c10": "wind",
+                "c11": 7,"c12": "radiation",
+                "c13": 23,"c14": "temperature",
+                "c15": 220,"c16": "luminosity",
+                "c17": 45,"c18": "humidity",
+                "c19": 2,"c20": "wind"
+            }
+        }
+    }

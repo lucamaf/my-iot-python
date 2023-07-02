@@ -1,0 +1,28 @@
+-- Install the instrumentation
+cd instrumentation
+./deploy
+cd ..
+
+-- build Producer and Consumer
+podman build . -t quay.io/mdiscepo/my-iot-python-producer
+podman build Consumer/ -t quay.io/mdiscepo/my-iot-python-consumer
+
+-- push to repo
+podman push quay.io/mdiscepo/my-iot-python-producer
+podman push quay.io/mdiscepo/my-iot-python-consumer
+
+-- Configure
+modify the config.json with the address of the broker service
+
+-- Import the grafana dashboard
+
+-- Dep
+./deploy.sh
+
+-- Cleanup
+cd instrumentation
+./instrumentation/undeploy
+cd ..
+./undeploy
+
+
